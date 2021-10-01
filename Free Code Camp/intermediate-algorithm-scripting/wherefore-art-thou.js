@@ -35,7 +35,11 @@ whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3}) should re
 function whatIsInAName(collection, source) {
   var arr = [];
   // Only change code below this line
-
+  let sourceArr = Object.entries(source);
+  for (const obj of collection) {
+    let isAllPropsInObj = sourceArr.every(el => obj.hasOwnProperty(el[0]) && obj[el[0]] === el[1])
+    if (isAllPropsInObj) arr.push(obj);
+  };
   // for (const obj of collection) {
   //   for (const prop in source) {
   //     if (obj[prop] === source[prop]) {
@@ -49,6 +53,3 @@ function whatIsInAName(collection, source) {
 }
 
 console.log(whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 }));
-
-// whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 }) 
-// should return [{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }].
